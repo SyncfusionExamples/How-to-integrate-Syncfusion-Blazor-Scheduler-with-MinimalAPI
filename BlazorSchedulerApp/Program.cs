@@ -6,11 +6,9 @@ using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Add HttpClient for AppointmentService
 builder.Services.AddScoped(sp =>
 {
     var navigationManager = sp.GetRequiredService<NavigationManager>();
@@ -21,10 +19,8 @@ builder.Services.AddScoped(sp =>
 });
 builder.Services.AddScoped<AppointmentService>();
 
-// Add Syncfusion Blazor service
 builder.Services.AddSyncfusionBlazor();
 
-// Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -37,7 +33,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// In-memory data storage for appointments
 var appointments = new List<AppointmentData>
 {
     new AppointmentData
@@ -69,7 +64,6 @@ var appointments = new List<AppointmentData>
     }
 };
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
@@ -79,8 +73,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAntiforgery();
 app.UseCors();
-
-// ============= Minimal API Endpoints for Appointments =============
 
 // GET: Get all appointments
 app.MapGet("/api/appointments", () =>
@@ -139,7 +131,6 @@ app.MapDelete("/api/appointments/{id}", (int id) =>
 })
 .WithName("DeleteAppointment");
 
- // ============= End of Minimal API Endpoints =============
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()

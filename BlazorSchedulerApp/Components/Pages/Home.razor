@@ -27,8 +27,7 @@
                           DataSource="@Appointments">
     </ScheduleEventSettings>
     
-    <ScheduleEvents TValue="AppointmentData"
-                               OnActionBegin="OnActionBegin">
+    <ScheduleEvents TValue="AppointmentData" OnActionBegin="OnActionBegin">
     </ScheduleEvents>
 </SfSchedule>
     </div>
@@ -61,7 +60,6 @@
                     var created = await AppointmentService.CreateAppointmentAsync(appointment);
                     if (created != null)
                     {
-                        // Update the appointment with the server-generated ID
                         appointment.Id = created.Id;
                     }
                 }
