@@ -1,4 +1,4 @@
- using BlazorSchedulerApp.Models;
+using BlazorSchedulerApp.Models;
 using System.Net.Http.Json;
 
 namespace BlazorSchedulerApp.Services;

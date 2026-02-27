@@ -6,31 +6,28 @@
     
 <div class="scheduler-container">
     
-<SfSchedule TValue="AppointmentData" 
-            @ref="ScheduleRef"
-            Height="650px" 
-            @bind-SelectedDate="@CurrentDate"
-            @bind-CurrentView="@CurrentView"
-            ShowQuickInfo="true"
-            AllowDragAndDrop="true"
-            AllowResizing="true">
-    
-    <ScheduleViews>
-        <ScheduleView Option="View.Day"></ScheduleView>
-        <ScheduleView Option="View.Week"></ScheduleView>
-        <ScheduleView Option="View.WorkWeek"></ScheduleView>
-        <ScheduleView Option="View.Month"></ScheduleView>
-        <ScheduleView Option="View.Agenda"></ScheduleView>
-    </ScheduleViews>
-    
-    <ScheduleEventSettings TValue="AppointmentData" 
-                          DataSource="@Appointments">
-    </ScheduleEventSettings>
-    
-    <ScheduleEvents TValue="AppointmentData" OnActionBegin="OnActionBegin">
-    </ScheduleEvents>
-</SfSchedule>
-    </div>
+    <SfSchedule TValue="AppointmentData" 
+                @ref="ScheduleRef"
+                Height="650px" 
+                @bind-SelectedDate="@CurrentDate"
+                @bind-CurrentView="@CurrentView"
+                ShowQuickInfo="true">
+
+        <ScheduleViews>
+            <ScheduleView Option="View.Day"></ScheduleView>
+            <ScheduleView Option="View.Week"></ScheduleView>
+            <ScheduleView Option="View.WorkWeek"></ScheduleView>
+            <ScheduleView Option="View.Month"></ScheduleView>
+            <ScheduleView Option="View.Agenda"></ScheduleView>
+        </ScheduleViews>
+
+        <ScheduleEventSettings TValue="AppointmentData" DataSource="@Appointments">
+        </ScheduleEventSettings>
+
+        <ScheduleEvents TValue="AppointmentData" OnActionBegin="OnActionBegin">
+        </ScheduleEvents>
+    </SfSchedule>
+</div>
     
 @code {
     private SfSchedule<AppointmentData>? ScheduleRef;

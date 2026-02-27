@@ -1,4 +1,4 @@
- namespace BlazorSchedulerApp.Models;
+namespace BlazorSchedulerApp.Models;
 public class AppointmentData
 {
     public int Id { get; set; }
