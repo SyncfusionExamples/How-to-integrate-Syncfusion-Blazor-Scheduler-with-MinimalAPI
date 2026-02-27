@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Blazor.Schedule" Version="32.2.3" />
-    <PackageReference Include="Syncfusion.Blazor.Themes" Version="32.2.3" />
+    <PackageReference Include="Syncfusion.Blazor.Schedule" Version="*" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="*" />
   </ItemGroup>
 
 </Project>
