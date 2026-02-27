@@ -8,8 +8,7 @@ This repository contains a sample full-stack application demonstrating how to sy
 
 ## Prerequisites
 
-- **.NET SDK** (>= 8.0)
-- **Visual Studio 2022 (v17.8+) or later** or **Visual Studio Code** with C# extension
+- **.NET SDK** (>= 10.0)
 
 ## Setup
 

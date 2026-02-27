@@ -2,7 +2,7 @@ namespace BlazorSchedulerApp.Models;
 public class AppointmentData
 {
     public int Id { get; set; }
-    public string Subject { get; set; } = "Add Title";
+    public string Subject { get; set; }
     public string Location { get; set; } = string.Empty;
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
