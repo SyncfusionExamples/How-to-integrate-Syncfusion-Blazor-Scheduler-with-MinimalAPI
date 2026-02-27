@@ -8,7 +8,7 @@ This repository contains a sample full-stack application demonstrating how to sy
 
 ## Prerequisites
 
-- **.NET SDK** (>= 10.0)
+- **.NET SDK** (10.0)
 
 ## Setup
 
