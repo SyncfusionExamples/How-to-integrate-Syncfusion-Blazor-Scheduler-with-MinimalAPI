@@ -1,0 +1,86 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject AppointmentService AppointmentService
+    
+<PageTitle>Appointment Scheduler</PageTitle>
+    
+<div class="scheduler-container">
+    
+    <SfSchedule TValue="AppointmentData" 
+                @ref="ScheduleRef"
+                Height="650px" 
+                @bind-SelectedDate="@CurrentDate"
+                @bind-CurrentView="@CurrentView"
+                ShowQuickInfo="true">
+
+        <ScheduleViews>
+            <ScheduleView Option="View.Day"></ScheduleView>
+            <ScheduleView Option="View.Week"></ScheduleView>
+            <ScheduleView Option="View.WorkWeek"></ScheduleView>
+            <ScheduleView Option="View.Month"></ScheduleView>
+            <ScheduleView Option="View.Agenda"></ScheduleView>
+        </ScheduleViews>
+
+        <ScheduleEventSettings TValue="AppointmentData" DataSource="@Appointments">
+        </ScheduleEventSettings>
+
+        <ScheduleEvents TValue="AppointmentData" OnActionBegin="OnActionBegin">
+        </ScheduleEvents>
+    </SfSchedule>
+</div>
+    
+@code {
+    private SfSchedule<AppointmentData>? ScheduleRef;
+    private DateTime CurrentDate = DateTime.Today;
+    private View CurrentView = View.Week;
+    private List<AppointmentData> Appointments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAppointments();
+    }
+
+    private async Task LoadAppointments()
+    {
+        Appointments = await AppointmentService.GetAppointmentsAsync();
+        StateHasChanged();
+    }
+
+    private async Task OnActionBegin(ActionEventArgs<AppointmentData> args)
+    {
+        try
+        {
+            if (args.ActionType == ActionType.EventCreate && args.AddedRecords != null && args.AddedRecords.Any())
+            {
+                foreach (var appointment in args.AddedRecords)
+                {
+                    var created = await AppointmentService.CreateAppointmentAsync(appointment);
+                    if (created != null)
+                    {
+                        appointment.Id = created.Id;
+                    }
+                }
+            }
+            else if (args.ActionType == ActionType.EventChange && args.ChangedRecords != null && args.ChangedRecords.Any())
+            {
+                foreach (var appointment in args.ChangedRecords)
+                {
+                    await AppointmentService.UpdateAppointmentAsync(appointment.Id, appointment);
+                }
+            }
+            else if (args.ActionType == ActionType.EventRemove && args.DeletedRecords != null && args.DeletedRecords.Any())
+            {
+                foreach (var appointment in args.DeletedRecords)
+                {
+                    await AppointmentService.DeleteAppointmentAsync(appointment.Id);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in OnActionBegin: {ex.Message}");
+            args.Cancel = true;
+        }
+    }
+
+}
